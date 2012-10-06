@@ -1,0 +1,10 @@
+TestModel:
+  type: entity
+  table: test
+  id:
+    id:
+      type: integer
+  fields:
+    data:
+      type: string
+      length: 255
