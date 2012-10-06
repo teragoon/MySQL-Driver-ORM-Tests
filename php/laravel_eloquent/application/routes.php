@@ -1,52 +1,26 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Simply tell Laravel the HTTP verbs and URIs it should respond to. It is a
-| breeze to setup your application using Laravel's RESTful routing and it
-| is perfectly suited for building large applications and simple APIs.
-|
-| Let's respond to a simple GET request to http://example.com/hello:
-|
-|		Route::get('hello', function()
-|		{
-|			return 'Hello World!';
-|		});
-|
-| You can even respond to more than one URI:
-|
-|		Route::post(array('hello', 'world'), function()
-|		{
-|			return 'Hello World!';
-|		});
-|
-| It's easy to allow URI wildcards using (:num) or (:any):
-|
-|		Route::put('hello/(:any)', function($name)
-|		{
-|			return "Welcome, $name.";
-|		});
-|
-*/
-
 Route::get('/', function()
 {
     $startTime = microtime(true);
 
     try
     {
+        class TestModel extends Eloquent
+        {
+            public static $table = 'test';
+            public static $timestamps = false;
+        }
+
         //write 10,000 rows to the database
         for($row = 1; $row <= 10000; $row++)
         {
             $data = 'Some data for row ' . $row;
-            DB::query('INSERT INTO test (id, data) VALUES (?, ?)', array($row, $data));
+            TestModel::create(array('id' => $row, 'data' => $data));
         }
 
         //read all 10,000 rows from the database
-        DB::query('SELECT * FROM test');
+        $data = TestModel::all();
 
         //report the script duration
         print microtime(true) - $startTime;

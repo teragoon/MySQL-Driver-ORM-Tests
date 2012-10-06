@@ -13,7 +13,7 @@ commands[0]="node nodejs/mysql/server.js"
 commands[1]="node nodejs/sequelize/server.js"
 commands[2]="php php/pdo/index.php"
 commands[3]="php php/laravel_raw/artisan route:call GET /"
-commands[4]="echo 'TODO'"
+commands[4]="php php/laravel_eloquent/artisan route:call GET /"
 commands[5]="echo 'TODO'"
 commands[6]="echo 'TODO'"
 
@@ -54,11 +54,12 @@ done
 # output a nice table of the data
 #
 
-# print a nice top border for the table
+# print a nice top border and header row for the table
+BORDER="+-------------------------+-------+-------+-------+-------+"
 echo ""
-echo "+-------------------------+-------+-------+-------+-------+"
+echo $BORDER
 echo "| Driver/ORM              | Run 1 | Run 2 | Run 3 |Average|"
-echo "+-------------------------+-------+-------+-------+-------+"
+echo $BORDER
 
 for result in ${results[@]}
 do
@@ -69,5 +70,6 @@ do
                                                    ${resultData[4]}
 done
 
-# print a nice bottom border for the table
-echo "+---------------+-------+-------+-------+-------+"
+# print a bottom border for the table
+echo $BORDER
+echo ""
