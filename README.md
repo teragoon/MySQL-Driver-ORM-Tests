@@ -57,3 +57,6 @@ table: test
 
 1. Figure out why I get a max connections error for the EventEmitter in the sequelize test. It's so
    slow that I feel like something has to be wrong.
+2. Figure out how to use Eloquent without the Laravel framework if possible. I dont think it matters
+   that much for this test since the timer doesn't start until the route has been resolved, but it
+   may be adding some extra run time for the queries. who knows.

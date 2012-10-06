@@ -9,7 +9,7 @@ commands[2]="php php/pdo/index.php"
 commands[3]="php php/laravel_raw/artisan route:call GET /"
 commands[4]="php php/laravel_eloquent/artisan route:call GET /"
 commands[5]="php php/doctrine/index.php"
-commands[6]="echo 'TODO'"
+commands[6]="php php/zenddb/index.php"
 
 names[0]="NodeJS_mysql"
 names[1]="NodeJS_sequelize"
@@ -65,17 +65,17 @@ done
 #
 
 # print a nice top border and header row for the table
-BORDER="+-------------------------+--------+-------+-------+-------+-------+"
+BORDER="+----------------------+--------+-------+-------+-------+-------+"
 echo ""
 echo $BORDER
-echo "| Driver/ORM              | Type   | Run 1 | Run 2 | Run 3 |Average|"
+echo "| Driver/ORM           | Type   | Run 1 | Run 2 | Run 3 |Average|"
 echo $BORDER
 
 for result in ${results[@]}
 do
   # split each result by the colon (:) and print the results in table format
   IFS=":" read -ra resultData <<< $result
-  printf "| %-23s | %-6s | %-5s | %-5s | %-5s | %-5s |\n" ${resultData[0]} ${resultData[1]} \
+  printf "| %-20s | %-6s | %-5s | %-5s | %-5s | %-5s |\n" ${resultData[0]} ${resultData[1]} \
                                                           ${resultData[2]} ${resultData[3]} \
                                                           ${resultData[4]}
 done
