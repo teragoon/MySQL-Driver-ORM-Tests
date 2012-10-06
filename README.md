@@ -3,6 +3,7 @@
 This tests the speed at which each of the various MySQL drivers and ORMs writes, reads, and
 truncates 10,000 rows of data.
 
+
 ## Results
 
 These tests were run on a mid-2012 Retina MacBook Pro with the following specs:
@@ -16,19 +17,29 @@ Node 0.8.0
 
 [PUT RESULTS HERE]
 
-## Required Components
 
-To replicate these tests you must have the following components installed:
+## Setup (if you want to run them yourself)
+Make sure you have the Required Components (below) installed/enabled, then run the following from
+the root of the project:
+    npm install -d
+    composer install
+    ./run_tests.sh
+
+### Required Components
+To replicate these tests it is recommended that you have the following components installed/enabled:
 
 #### PHP
 
-PHP 5 +
-PDO
+* PHP 5.2+
+* PDO
+* php_mysql
+* Composer
 
 #### Node
 
-NodeJS 0.7.0 +
-NPM - Node Package Manager
+* NodeJS 0.7.0+
+* NPM - Node Package Manager
+
 
 ## Database Schema
 
@@ -40,6 +51,7 @@ table: test
   columns:
     id : INT
     data : VARCHAR(255)
+
 
 ## Todo
 

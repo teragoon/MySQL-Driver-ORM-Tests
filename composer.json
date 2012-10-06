@@ -1,0 +1,8 @@
+{
+  "require": {
+    "doctrine/orm": "*",
+    "doctrine/dbal": "*",
+    "symfony/yaml": "*",
+    "zendframework/zend-db": "2.0.2"
+  }
+}

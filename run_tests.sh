@@ -19,13 +19,21 @@ names[4]="PHP_laravel_eloquent"
 names[5]="PHP_doctrine"
 names[6]="PHP_zenddb"
 
+types[0]="driver"
+types[1]="orm"
+types[2]="driver"
+types[3]="orm"
+types[4]="orm"
+types[5]="orm"
+types[6]="driver"
+
 #
 # iterate over the array running each test 3 times
 #
 for i in ${!commands[*]}
 do
-  # create a string with the name of the driver or ORM being tested followed by a colon (:)
-  results[$i]=${names[$i]}:
+  # create a string with the name and type of the driver or ORM being tested separated by colons (:)
+  results[$i]=${names[$i]}:${types[$i]}:
 
   #
   # run each test 3 times
@@ -57,19 +65,19 @@ done
 #
 
 # print a nice top border and header row for the table
-BORDER="+-------------------------+-------+-------+-------+-------+"
+BORDER="+-------------------------+--------+-------+-------+-------+-------+"
 echo ""
 echo $BORDER
-echo "| Driver/ORM              | Run 1 | Run 2 | Run 3 |Average|"
+echo "| Driver/ORM              | Type   | Run 1 | Run 2 | Run 3 |Average|"
 echo $BORDER
 
 for result in ${results[@]}
 do
   # split each result by the colon (:) and print the results in table format
   IFS=":" read -ra resultData <<< $result
-  printf "| %-23s | %-5s | %-5s | %-5s | %-5s |\n" ${resultData[0]} ${resultData[1]} \
-                                                   ${resultData[2]} ${resultData[3]} \
-                                                   ${resultData[4]}
+  printf "| %-23s | %-6s | %-5s | %-5s | %-5s | %-5s |\n" ${resultData[0]} ${resultData[1]} \
+                                                          ${resultData[2]} ${resultData[3]} \
+                                                          ${resultData[4]}
 done
 
 # print a bottom border for the table
