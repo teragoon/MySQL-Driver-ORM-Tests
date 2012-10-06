@@ -2,13 +2,15 @@ var Sequelize = require("sequelize");
 
 var startTime = Date.now();
 
+var totalRows = 10000;
+
 try {
   //connect to the DB
   var sequelize = new Sequelize('test', 'root', '', {
     host: '127.0.0.1',
     dialect: 'mysql',
     logging: false,
-    maxConcurrentQueries: 10000
+    maxConcurrentQueries: totalRows
   });
 
   //define our model
@@ -22,7 +24,6 @@ try {
 
   //write 10,000 rows to the database
   var rowsWritten = 0;
-  var totalRows = 10000;
   for(var row = 1; row <= totalRows; row++) {
     var data = 'Some data for row ' + row;
     TestModel.create({ id: row, data: data }).success(function() {
