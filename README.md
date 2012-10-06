@@ -15,7 +15,17 @@ HDD: 512 GB Solid State (500.28 GB APPLE SSD SM512E)
 PHP 5.3.15
 Node 0.8.0
 
-[PUT RESULTS HERE]
++----------------------+--------+-------+-------+-------+-------+
+| Driver/ORM           | Type   | Run 1 | Run 2 | Run 3 |Average|
++----------------------+--------+-------+-------+-------+-------+
+| NodeJS_mysql         | driver | 4.53  | 4.58  | 4.65  | 4.58  |
+| NodeJS_sequelize     | orm    | 11.64 | 11.70 | 11.74 | 11.69 |
+| PHP_PDO              | driver | 2.14  | 2.21  | 2.21  | 2.18  |
+| PHP_laravel_raw      | orm    | 3.33  | 3.37  | 3.38  | 3.36  |
+| PHP_laravel_eloquent | orm    | 4.52  | 4.38  | 4.37  | 4.42  |
+| PHP_doctrine         | orm    | 2.43  | 2.44  | 2.54  | 2.47  |
+| PHP_zenddb           | driver | 2.39  | 2.48  | 2.48  | 2.45  |
++----------------------+--------+-------+-------+-------+-------+
 
 
 ## Setup (if you want to run them yourself)
