@@ -15,6 +15,7 @@ HDD: 512 GB Solid State (500.28 GB APPLE SSD SM512E)
 PHP 5.3.15
 Node 0.8.0
 
+```
 +----------------------+--------+-------+-------+-------+-------+
 | Driver/ORM           | Type   | Run 1 | Run 2 | Run 3 |Average|
 +----------------------+--------+-------+-------+-------+-------+
@@ -26,14 +27,17 @@ Node 0.8.0
 | PHP_doctrine         | orm    | 2.43  | 2.44  | 2.54  | 2.47  |
 | PHP_zenddb           | driver | 2.39  | 2.48  | 2.48  | 2.45  |
 +----------------------+--------+-------+-------+-------+-------+
+```
 
 
 ## Setup (if you want to run them yourself)
 Make sure you have the Required Components (below) installed/enabled, then run the following from
 the root of the project:
-    npm install -d
-    composer install
-    ./run_tests.sh
+```
+npm install -d
+composer install
+./run_tests.sh
+```
 
 ### Required Components
 To replicate these tests it is recommended that you have the following components installed/enabled:
@@ -53,6 +57,7 @@ To replicate these tests it is recommended that you have the following component
 
 ## Database Schema
 
+```
 database: test
   encoding: utf8
 table: test
@@ -61,6 +66,7 @@ table: test
   columns:
     id : INT
     data : VARCHAR(255)
+```
 
 
 ## Todo
