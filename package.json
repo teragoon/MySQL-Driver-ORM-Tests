@@ -1,0 +1,12 @@
+{
+  "name": "MySQL_Driver_&_ORM_Tests",
+  "version": "1.0.0",
+  "author": "David Dripps <david.dripps@gmail.com>",
+  "description": "An automated set of tests to compare the various MySQL drivers and ORMs for PHP and NodeJS",
+  "keywords": ["MySQL", "Node.js", "Node", "PHP", "ORM", "database driver", "DB driver", "MySQL driver"],
+  "engines": { "node": ">= 0.7.2" },
+  "dependencies": {
+    "mysql": "2.0.0-alpha2",
+    "sequelize": "1.6.0-alpha-1"
+  }
+}
