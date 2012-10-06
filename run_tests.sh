@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-#arrays of commands to be run and their readable names
+# arrays of commands to be run and their readable names
 names[0]="NodeJS_mysql"
 names[1]="NodeJS_sequelize"
 names[2]="PHP_PDO"
@@ -17,34 +17,57 @@ commands[4]="echo 'TODO'"
 commands[5]="echo 'TODO'"
 commands[6]="echo 'TODO'"
 
-#iterate over the array running each test 3 times
+#
+# iterate over the array running each test 3 times
+#
 for i in ${!commands[*]}
 do
-  #create a string with the name of the driver or ORM being tested followed by a colon (:)
+  # create a string with the name of the driver or ORM being tested followed by a colon (:)
   results[$i]=${names[$i]}:
 
-  #run each test 3 times
+  #
+  # run each test 3 times
+  #
   for (( run=0; run < 3; run++ ))
   do
-    #run the test and store the output, truncating the result to 2 decimal places
+    # run the test and store the output, truncating the result to 2 decimal places
     result[$run]=$(printf %.2f `${commands[$i]}`)
 
-    #add the number, truncated to 2 decimal places, to the test string followed by a colon (:)
+    # add the number, truncated to 2 decimal places, to the test string followed by a colon (:)
     results[$i]=${results[$i]}${result[$run]}:
   done
 
-  #average the results of the 3 runs
+  #
+  # average the results of the 3 runs
+  #
   total=0
   for time in ${result[@]}
   do
     total=`echo "$total+$time" | bc`
   done
 
-  #add the average to the test string
+  # add the average to the test string
   results[$i]=${results[$i]}`echo "scale=2;$total/${#result[@]}" | bc`
 done
 
-echo ${results[@]}
+#
+# output a nice table of the data
+#
 
+# print a nice top border for the table
+echo ""
+echo "+-------------------------+-------+-------+-------+-------+"
+echo "| Driver/ORM              | Run 1 | Run 2 | Run 3 |Average|"
+echo "+-------------------------+-------+-------+-------+-------+"
 
-#TODO: output a nice table of the data
+for result in ${results[@]}
+do
+  # split each result by the colon (:) and print the results in table format
+  IFS=":" read -ra resultData <<< $result
+  printf "| %-23s | %-5s | %-5s | %-5s | %-5s |\n" ${resultData[0]} ${resultData[1]} \
+                                                   ${resultData[2]} ${resultData[3]} \
+                                                   ${resultData[4]}
+done
+
+# print a nice bottom border for the table
+echo "+---------------+-------+-------+-------+-------+"

@@ -16,7 +16,7 @@ Node 0.8.0
 
 [PUT RESULTS HERE]
 
-### Required Components
+## Required Components
 
 To replicate these tests you must have the following components installed:
 
@@ -30,7 +30,7 @@ PDO
 NodeJS 0.7.0 +
 NPM - Node Package Manager
 
-### Database Schema
+## Database Schema
 
 database: test
   encoding: utf8
