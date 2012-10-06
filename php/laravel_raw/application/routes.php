@@ -34,7 +34,32 @@
 
 Route::get('/', function()
 {
-	return View::make('home.index');
+    $startTime = microtime(true);
+
+    try
+    {
+        //write 10,000 rows to the database
+        for($row = 1; $row <= 10000; $row++)
+        {
+            $data = 'Some data for row ' . $row;
+            DB::query('INSERT INTO test (id, data) VALUES (?, ?)', array($row, $data));
+        }
+
+        //read all 10,000 rows from the database
+        DB::query('SELECT * FROM test');
+
+        //report the script duration
+        print microtime(true) - $startTime;
+
+        //truncate the table data
+        DB::query('TRUNCATE test');
+    }
+    catch (PDOException $ex)
+    {
+        print 'PDO Error: ' . $ex->getMessage();
+    }
+
+    die();
 });
 
 /*
