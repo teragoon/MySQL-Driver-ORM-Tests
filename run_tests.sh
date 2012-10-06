@@ -1,21 +1,23 @@
 #!/usr/bin/env bash
 
 # arrays of commands to be run and their readable names
-names[0]="NodeJS_mysql"
-names[1]="NodeJS_sequelize"
-names[2]="PHP_PDO"
-names[3]="PHP_laravel_raw"
-names[4]="PHP_laravel_eloquent"
-names[5]="PHP_symphony_doctrine"
-names[6]="PHP_zend_zenddb"
-
+##  you can comment out the commands you aren't interested in, but don't remove them or the names
+##  won't match up anymore
 commands[0]="node nodejs/mysql/server.js"
 commands[1]="node nodejs/sequelize/server.js"
 commands[2]="php php/pdo/index.php"
 commands[3]="php php/laravel_raw/artisan route:call GET /"
 commands[4]="php php/laravel_eloquent/artisan route:call GET /"
-commands[5]="echo 'TODO'"
+commands[5]="php php/doctrine/index.php"
 commands[6]="echo 'TODO'"
+
+names[0]="NodeJS_mysql"
+names[1]="NodeJS_sequelize"
+names[2]="PHP_PDO"
+names[3]="PHP_laravel_raw"
+names[4]="PHP_laravel_eloquent"
+names[5]="PHP_doctrine"
+names[6]="PHP_zenddb"
 
 #
 # iterate over the array running each test 3 times

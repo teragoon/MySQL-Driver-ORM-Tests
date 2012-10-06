@@ -40,3 +40,8 @@ table: test
   columns:
     id : INT
     data : VARCHAR(255)
+
+## Todo
+
+1. Figure out why I get a max connections error for the EventEmitter in the sequelize test. It's so
+   slow that I feel like something has to be wrong.

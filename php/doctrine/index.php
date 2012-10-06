@@ -6,82 +6,108 @@ use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity
- * @ORM\Table(name="test")
- */
-class TestModel
+
+$startTime = microtime(true);
+
+try
 {
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Entity
+     * @ORM\Table(name="test")
      */
-    protected $id;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    protected $data;
-
-
-    /**
-     * Set id
-     *
-     * @param integer $id
-     * @return TestModel
-     */
-    public function setId($id)
+    class TestModel
     {
-        $this->id = $id;
+        /**
+         * @ORM\Column(type="integer")
+         */
+        protected $id;
 
-        return $this;
+        /**
+         * @ORM\Column(type="string", length=255)
+         */
+        protected $data;
+
+
+        /**
+         * Set id
+         *
+         * @param integer $id
+         * @return TestModel
+         */
+        public function setId($id)
+        {
+            $this->id = $id;
+
+            return $this;
+        }
+
+        /**
+         * Get id
+         *
+         * @return integer
+         */
+        public function getId()
+        {
+            return $this->id;
+        }
+
+        /**
+         * Set data
+         *
+         * @param string $data
+         * @return TestModel
+         */
+        public function setData($data)
+        {
+            $this->data = $data;
+
+            return $this;
+        }
+
+        /**
+         * Get data
+         *
+         * @return string
+         */
+        public function getData()
+        {
+            return $this->data;
+        }
     }
 
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
+    //connect to the database
+    $config = Setup::createYAMLMetadataConfiguration(array(__DIR__), true);
+    $em = EntityManager::create(array(
+        'driver' => 'pdo_mysql',
+        'host' => '127.0.0.1',
+        'user' => 'root',
+        'dbname' => 'test'
+    ), $config);
 
-    /**
-     * Set data
-     *
-     * @param string $data
-     * @return TestModel
-     */
-    public function setData($data)
+    //write 10,000 rows to the database
+    for($row = 1; $row <= 10000; $row++)
     {
-        $this->data = $data;
-
-        return $this;
+        $data = 'Some data for row ' . $row;
+        $model = new TestModel();
+        $model->setId($row)->setData($data);
+        $em->persist($model);
     }
+    $em->flush();
 
-    /**
-     * Get data
-     *
-     * @return string
-     */
-    public function getData()
-    {
-        return $this->data;
+    //read all 10,000 rows from the database
+    $em->getRepository('TestModel')->findAll();
+
+    //report the script duration
+    print microtime(true) - $startTime;
+
+    //truncate the table data
+    try {
+        $emptyRsm = new \Doctrine\ORM\Query\ResultSetMapping();
+        $em->createNativeQuery('TRUNCATE test', $emptyRsm)->execute();
     }
+    catch (Exception $ignore) {}
 }
-
-$model = new TestModel();
-$model->setId(1);
-$model->setData('test data');
-
-$config = Setup::createYAMLMetadataConfiguration(array(__DIR__), true);
-
-$em = EntityManager::create(array(
-    'driver' => 'pdo_mysql',
-    'host' => '127.0.0.1',
-    'user' => 'root',
-    'dbname' => 'test'
-), $config);
-
-$em->persist($model);
-$em->flush();
+catch (Exception $e)
+{
+    print 'Doctrine Error: ' . $e->getMessage();
+}
