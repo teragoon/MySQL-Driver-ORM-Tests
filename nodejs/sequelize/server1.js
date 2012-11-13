@@ -11,7 +11,7 @@ try {
     dialect: 'mysql',
     logging: false,
     maxConcurrentQueries: 100
-    ,pool: { maxConnections: 1, maxIdleTime: 30}
+    ,pool: { maxConnections: 10, maxIdleTime: 30}
   });
 
   //define our model

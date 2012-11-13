@@ -17,7 +17,7 @@ try
         $data = 'Some data for row ' . $row;
         $procedure->execute();
     }
-
+    
     //read all 10,000 rows from the database
     $db->query('SELECT * FROM test');
 
