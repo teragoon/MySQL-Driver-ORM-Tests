@@ -6,7 +6,7 @@ truncates 10,000 rows of data.
 
 ## Results
 
-These tests were run on a mid-2012 Retina MacBook Pro with the following specs:
+These tests were run on a Windows 7 with the following specs:
 
 * CPU: 2.80 GHz Intel Core i5
 * RAM: 4 GB
